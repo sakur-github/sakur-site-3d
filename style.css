@@ -1,0 +1,62 @@
+@import url("https://use.typekit.net/jmk3xov.css");
+
+:root {
+  --bg: rgba(255, 255, 255, 0.75);
+  box-sizing: border-box;
+  font-family: "Roboto";
+}
+
+
+html, body {
+  margin: 0;
+  background-color: #fae9f3;
+  color: black;
+}
+
+body {
+  display: flex;
+}
+
+canvas {
+  position: fixed;
+  top: 0;
+  right: 0;
+}
+
+
+main {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  padding: 0 2rem;
+  max-width: 50rem;
+  min-height: 200rem;
+}
+
+@media (min-width: 768px) {
+  main {
+    padding: 5rem 10rem;
+  }
+}
+
+header {
+  font-family: "Cinzel Decorative", cursive;
+  color: black;
+  grid-column: 2 / span 5;
+  font-size: 2.5rem;
+}
+
+@media (max-width: 768px) {
+  header {
+    margin-bottom: 8rem;  
+  }
+}
+
+section {
+  border: 1px solid black;
+  border-radius: 40px;
+  margin: 2rem 0;
+  padding: 2rem;
+  font-size: 1.2rem;
+  background: var(--bg);
+}
