@@ -25,10 +25,18 @@ camera.position.setZ(1);
 moveCamera();
 document.body.onscroll = moveCamera; */
 
+const canvas = document.querySelector("#bg");
+
 const renderer = new THREE.WebGL1Renderer({
   alpha: true,
-  canvas: document.querySelector("#bg"),
+  canvas,
 });
+
+window.onresize = () => {
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+};
 
 renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setSize(window.innerWidth, window.innerHeight);
