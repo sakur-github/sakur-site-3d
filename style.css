@@ -30,6 +30,7 @@ main {
   position: absolute;
   padding: 0 2rem;
   max-width: 50rem;
+  min-height: 220rem;
 }
 
 @media (min-width: 768px) {
@@ -38,15 +39,23 @@ main {
   }
 }
 
-header {
-  font-family: "Cinzel Decorative", cursive;
+h1 {
   color: black;
   grid-column: 2 / span 5;
-  font-size: 2.5rem;
+  font-size: 5rem;
+  margin-bottom: 0.5rem;
+}
+h2 {
+  color: black;
+  font-size: 2rem;
+}
+
+a {
+  color: rgb(143,179,202);
 }
 
 @media (max-width: 768px) {
-  h1 {
+  header {
     margin-bottom: 14rem;  
   }
 }

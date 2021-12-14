@@ -49,21 +49,23 @@ window.addEventListener("scroll", () => {
   if (scrollY > 1200 && scrollY < 2600) {
     //camera.translateZ(scrollDelta * 0.016);
     camera.position.lerp(
-      new Vector3(cameraDefaults.x + 0.1, cameraDefaults.y, 0.5),
+      new Vector3(cameraDefaults.x + 0.1, cameraDefaults.y, 0.8),
       0.1
     );
     camera.rotation.set(0, 0, 0);
     pivot.rotation.set(0, 0, 0);
   } else if (scrollY > 2600 && scrollY < 3000) {
     camera.position.lerp(
-      new Vector3(cameraDefaults.x - 0.05, cameraDefaults.y, 1),
+      new Vector3(cameraDefaults.x - 0.05, cameraDefaults.y, 0.8),
       0.1
     );
     pivot.rotateY(scrollDelta * 0.005);
+    console.log(scrollY);
   } else if (scrollY > 3000 && scrollY < 4000) {
-    pivot.rotation.set(3.14, -1.1, 3.14);
+    console.log(pivot.rotation);
+    pivot.rotation.set(3.14, -1.1465, 3.14);
     pivot.position.lerp(new Vector3(0, 0, 0), 0.1);
-  } else if (scrollY > 4000 && scrollY < 4600) {
+  } else if (scrollY > 4000 && scrollY < 20000) {
     pivot.position.lerp(new Vector3(0, -2, 0), 0.001);
     console.log(scrollY);
   } /*  else {
