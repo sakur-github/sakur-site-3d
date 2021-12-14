@@ -60,14 +60,11 @@ window.addEventListener("scroll", () => {
       0.1
     );
     pivot.rotateY(scrollDelta * 0.005);
-    console.log(scrollY);
   } else if (scrollY > 3000 && scrollY < 4000) {
-    console.log(pivot.rotation);
     pivot.rotation.set(3.14, -1.1465, 3.14);
     pivot.position.lerp(new Vector3(0, 0, 0), 0.1);
   } else if (scrollY > 4000 && scrollY < 20000) {
     pivot.position.lerp(new Vector3(0, -2, 0), 0.001);
-    console.log(scrollY);
   } /*  else {
     camera.rotation.set(0, 0, 0);
     camera.position.set(cameraDefaults.x, cameraDefaults.y, cameraDefaults.z);
