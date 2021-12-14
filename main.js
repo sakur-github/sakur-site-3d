@@ -4,6 +4,7 @@ import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { Vector3 } from "three";
+
 const isDesktop = window.innerWidth > 768;
 let mixer = new THREE.AnimationMixer();
 const clock = new THREE.Clock();
@@ -19,12 +20,11 @@ const camera = new THREE.PerspectiveCamera(
   0.1,
   20000
 );
-const startingX = 0;
-const startingY = 1;
-const startingZ = 2;
+
+const cameraDefaults = new Vector3(0, 1, 2);
 if (!characterLoaded) {
   window.scrollTo({ top: 0 });
-  camera.position.set(startingX, startingY, startingZ);
+  camera.position.set(cameraDefaults.x, cameraDefaults.y, cameraDefaults.z);
   camera.rotation.set(0, 0, 0);
 }
 
@@ -35,22 +35,40 @@ window.camera = camera;
 
 let newScroll = window.scrollY;
 window.addEventListener("scroll", () => {
+  //pivot.rotateY(0.01);
   const oldScroll = newScroll;
   newScroll = window.scrollY;
   const scrollDelta = oldScroll - newScroll;
   if (scrollY < 1200) {
-    camera.position.lerp(new Vector3(startingX, startingY, startingZ), 0.1);
+    pivot.rotation.set(0, 0, 0);
+    camera.position.lerp(
+      new Vector3(cameraDefaults.x, cameraDefaults.y, cameraDefaults.z),
+      0.1
+    );
   }
   if (scrollY > 1200 && scrollY < 2600) {
     //camera.translateZ(scrollDelta * 0.016);
-    camera.position.lerp(new Vector3(startingX + 0.1, startingY, 0.5), 0.1);
+    camera.position.lerp(
+      new Vector3(cameraDefaults.x + 0.1, cameraDefaults.y, 0.5),
+      0.1
+    );
     camera.rotation.set(0, 0, 0);
-  } else if (scrollY > 2600 && scrollY < 3500) {
-    camera.position.lerp(new Vector3(1.2, 1.5, -1), 0.1);
-    camera.rotation.set(-2.6, 0.73, -3.5);
-  } /* else if (scrollY > 3500) {
-    camera.position.lerp(new Vector3(0.18, 1, -0.16), 0.1);
-    camera.rotation.set(0.04, 2.5, -0.03);
+    pivot.rotation.set(0, 0, 0);
+  } else if (scrollY > 2600 && scrollY < 3000) {
+    camera.position.lerp(
+      new Vector3(cameraDefaults.x - 0.05, cameraDefaults.y, 1),
+      0.1
+    );
+    pivot.rotateY(scrollDelta * 0.005);
+  } else if (scrollY > 3000 && scrollY < 4000) {
+    pivot.rotation.set(3.14, -1.1, 3.14);
+    pivot.position.lerp(new Vector3(0, 0, 0), 0.1);
+  } else if (scrollY > 4000 && scrollY < 4600) {
+    pivot.position.lerp(new Vector3(0, -2, 0), 0.001);
+    console.log(scrollY);
+  } /*  else {
+    camera.rotation.set(0, 0, 0);
+    camera.position.set(cameraDefaults.x, cameraDefaults.y, cameraDefaults.z);
   } */
 });
 
@@ -80,6 +98,10 @@ const ambientLight = new THREE.AmbientLight(0xffffff);
 scene.add(pointLight, ambientLight);
 
 scene.background = null;
+
+const pivot = new THREE.Group();
+scene.add(pivot);
+
 const officePositions = { x: 0, y: 0.77, z: 0 };
 loader.load(
   "models/animated/oliver typing.glb",
@@ -100,7 +122,7 @@ loader.load(
     mixer = new THREE.AnimationMixer(oliver);
     const animations = gltf.animations;
     const typingAction = mixer.clipAction(animations[0]);
-    scene.add(oliver);
+    pivot.add(oliver);
     typingAction.play();
   },
   undefined,
@@ -121,7 +143,7 @@ loader.load(
       officePositions.z
     );
     //model.rotateY(-0.5);
-    scene.add(office);
+    pivot.add(office);
   },
   undefined,
   function (error) {
