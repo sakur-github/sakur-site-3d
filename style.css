@@ -30,7 +30,6 @@ main {
   position: absolute;
   padding: 0 2rem;
   max-width: 50rem;
-  min-height: 2000rem;
 }
 
 @media (min-width: 768px) {

@@ -48,10 +48,10 @@ window.addEventListener("scroll", () => {
   } else if (scrollY > 2600 && scrollY < 3500) {
     camera.position.lerp(new Vector3(1.2, 1.5, -1), 0.1);
     camera.rotation.set(-2.6, 0.73, -3.5);
-  } else if (scrollY > 3500) {
+  } /* else if (scrollY > 3500) {
     camera.position.lerp(new Vector3(0.18, 1, -0.16), 0.1);
     camera.rotation.set(0.04, 2.5, -0.03);
-  }
+  } */
 });
 
 const canvas = document.querySelector("#bg");
