@@ -31,28 +31,24 @@ if (!characterLoaded) {
 let oliver;
 let office;
 
+window.camera = camera;
+
 let newScroll = window.scrollY;
 window.addEventListener("scroll", () => {
   const oldScroll = newScroll;
   newScroll = window.scrollY;
   const scrollDelta = oldScroll - newScroll;
-  if (scrollY <= 500) {
+  if (scrollY < 1200) {
+    camera.position.lerp(new Vector3(startingX, startingY, startingZ), 0.1);
+  }
+  if (scrollY > 1200 && scrollY < 2600) {
     //camera.translateZ(scrollDelta * 0.016);
-    if (scrollDelta < 0) {
-      camera.position.lerp(new Vector3(startingX + 0.1, startingY, 1), 0.05);
-    } else if (scrollDelta > 0) {
-      camera.position.lerp(new Vector3(startingX, startingY, startingZ), 0.05);
-    }
-  } else {
-  } /* else if (scrollY > 300) {
-    if (scrollDelta < 0) {
-      //camera.rotateY(0.001);
-      camera.position.lerp(new Vector3(startingX + 1, startingY, -1), 0.01);
-    } else if (scrollDelta > 0) {
-      camera.position.lerp(new Vector3(startingX, startingY, 0.5), 0.1);
-      // camera.rotateY(-0.001);
-    }
-  } */
+    camera.position.lerp(new Vector3(startingX + 0.1, startingY, 0.5), 0.1);
+    camera.rotation.set(0, 0, 0);
+  } else if (scrollY > 2600) {
+    camera.position.lerp(new Vector3(1.2, 1.5, -1), 0.1);
+    camera.rotation.set(-2.6, 0.73, -3.5);
+  }
 });
 
 const canvas = document.querySelector("#bg");
