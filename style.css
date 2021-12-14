@@ -1,7 +1,7 @@
 @import url("https://use.typekit.net/jmk3xov.css");
 
 :root {
-  --bg: rgba(255, 255, 255, 0.75);
+  --bg: rgba(0, 0, 0, 0.5);
   box-sizing: border-box;
   font-family: "Roboto";
 }
@@ -9,8 +9,8 @@
 
 html, body {
   margin: 0;
-  background-color: #fae9f3;
-  color: black;
+  background-color: white;
+  color: white;
 }
 
 body {
@@ -30,7 +30,7 @@ main {
   position: absolute;
   padding: 0 2rem;
   max-width: 50rem;
-  min-height: 200rem;
+  min-height: 2000rem;
 }
 
 @media (min-width: 768px) {
