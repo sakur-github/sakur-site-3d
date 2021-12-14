@@ -13,15 +13,17 @@ const loader = new GLTFLoader();
 let characterLoaded = false;
 
 const camera = new THREE.PerspectiveCamera(
-  10,
+  20,
   window.innerWidth / window.innerHeight,
   0.1,
   20000
 );
 const startingX = 0;
+const startingY = 1;
+const startingZ = 4;
 if (!characterLoaded) {
   window.scrollTo({ top: 0 });
-  camera.position.set(startingX, 1, 4);
+  camera.position.set(startingX, startingY, startingZ);
   camera.rotation.set(0, 0, 0);
 }
 
@@ -33,22 +35,32 @@ window.addEventListener("scroll", () => {
   const oldScroll = newScroll;
   newScroll = window.scrollY;
   const scrollDelta = oldScroll - newScroll;
-
   if (scrollY <= 200) {
-    camera.translateZ(scrollDelta * 0.016);
+    //camera.translateZ(scrollDelta * 0.016);
+    camera.position.set(startingX, startingY, startingZ + scrollY * -0.015);
+    camera.rotation.set(0, 0, 0);
   } else if (scrollY <= 400) {
-    camera.translateX(scrollDelta * -0.0005);
-  } else if (scrollY <= 500) {
-    camera.translateX(scrollDelta * -0.01);
-    camera.translateZ(scrollDelta * -0.005);
-    camera.rotateY(scrollDelta * -0.009);
-  } else if (scrollY <= 740) {
-    camera.translateX(scrollDelta * -0.01);
-    camera.rotateY(scrollDelta * -0.007);
-  } else {
-    camera.translateZ(scrollDelta * 0.016);
+    camera.position.set(startingX + (scrollY - 200) * 0.0005, startingY, 1);
+    camera.rotation.set(0, 0, 0);
   }
-  console.log(scrollY);
+  //} else if (scrollY <= 500) {
+  else if (scrollY <= 550) {
+    camera.position.set(0.1 + (scrollY - 400) * 0.009, 1, 1);
+    camera.rotation.set(0, (scrollY - 400) * 0.006, 0);
+  } else if (scrollY <= 835) {
+    camera.position.set(1.45, 1, 1 + (scrollY - 550) * -0.01);
+    //camera.rotation.set(0, 0.9, 0);
+    camera.rotation.set(0, 0.9 + (scrollY - 550) * 0.0055, 0);
+    console.log(camera.position);
+    console.log(scrollY);
+  } else if (scrollY <= 968) {
+    camera.rotation.set(0, 2.5, 0);
+    camera.translateX(scrollDelta * -0.000019);
+    camera.translateZ(scrollDelta * 0.016);
+  } else {
+    console.log(camera.position);
+    console.log(scrollY);
+  }
 });
 
 const canvas = document.querySelector("#bg");
